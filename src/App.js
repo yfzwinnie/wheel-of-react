@@ -1,23 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './App.scss';
+import Board from './components/Board/Board';
+import puzzles from './puzzle.json';
 
 function App() {
+  const [currentPuzzle, setCurrentPuzzle] = useState("");
+
+  useEffect(() => {
+    setCurrentPuzzle(puzzles[Math.floor(Math.random() * puzzles.length)]);
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Wheel of React!</h1>
+        <Board currentPuzzle={currentPuzzle}/>
       </header>
     </div>
   );
