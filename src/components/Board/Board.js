@@ -33,11 +33,12 @@ function Board({ currentPuzzle }) {
             ]
             .map((boardRow, rowIndex) => {
                 return (
-                    <div className="board-row">
+                    <div key={rowIndex} className="board-row">
                         {
                             boardRow
                                 .map((tileSpot, tileIndex) => (
                                     <LetterTile
+                                        key={tileIndex}
                                         letter={puzzleObject[tileIndex + getIndexOffset(rowIndex)]}
                                     />
                                     )
