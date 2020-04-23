@@ -1,48 +1,53 @@
 import React from 'react';
+
 import LetterTile from '../LetterTile/LetterTile';
 import './Board.scss';
 
-const invalidTiles = []
-function Board({ currentPuzzle }) {
+const boardTemplate = [
+    [null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, null],
+    [null, null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, null, null],
+    [null, null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, null, null],
+    [null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, null],
+]
 
-    const puzzleObject = currentPuzzle.split('').reduce((acc, curr) => {
-        acc[Object.keys(acc).length + 13] = { letter: curr, isGuessed: false };
-        return acc;
-    }, {})
+function Board({ puzzle, guesses }) {
+    let puzzleArray = [...puzzle.toUpperCase()];
 
-    console.log(puzzleObject);
+    function renderBoardRow(boardRow) {
+        return (
+            boardRow
+                .map((tileSpot, tileIndex) => {
+                    const letter = puzzleArray[0];
+                    // TODO: extract to isValidTileSpot function
+                    if (tileSpot === null || !letter) {
+                        return (
+                            <LetterTile
+                                key={tileIndex}
+                            />
+                        )
+                    }
 
-    function getIndexOffset(rowIndex) {
-        const offsets = {
-            0: 0,
-            1: 12,
-            2: 26,
-            3: 40,
-        }
+                    puzzleArray = [...puzzleArray.slice(1)]
 
-        return offsets[rowIndex];
+                    return (
+                        <LetterTile
+                            key={tileIndex}
+                            letter={letter}
+                            isGuessed={guesses.indexOf(letter.toLowerCase()) > -1}
+                        />
+                    )
+                })
+        )
     }
 
     function renderBoard() {
         return (
-            [
-                new Array(12).fill(null),
-                new Array(14).fill(null),
-                new Array(14).fill(null),
-                new Array(12).fill(null)
-            ]
+           boardTemplate
             .map((boardRow, rowIndex) => {
                 return (
                     <div key={rowIndex} className="board-row">
                         {
-                            boardRow
-                                .map((tileSpot, tileIndex) => (
-                                    <LetterTile
-                                        key={tileIndex}
-                                        letter={puzzleObject[tileIndex + getIndexOffset(rowIndex)]}
-                                    />
-                                    )
-                                )
+                            renderBoardRow(boardRow)
                         }
                     </div>
                 )
