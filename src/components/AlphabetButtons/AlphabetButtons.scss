@@ -13,8 +13,13 @@ button {
   border-radius: 0.25rem;
   transition: transform 0.3s;
 
-  &:hover {
+  &:hover:not([disabled]) {
     cursor: pointer;
     transform: scale(1.1);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    transform: scale(0.9);
   }
 }
