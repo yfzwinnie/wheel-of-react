@@ -2,24 +2,24 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-}
 
-button {
-  width: 2.75rem;
-  height: 2.75rem;
-  font-size: 1.75rem;
-  text-transform: uppercase;
-  margin: 0 0.25rem;
-  border-radius: 0.25rem;
-  transition: transform 0.3s;
+  button {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    margin: 0 0.25rem;
+    border-radius: 0.25rem;
+    transition: transform 0.3s;
 
-  &:hover:not([disabled]) {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
+    &:hover:not([disabled]) {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
 
-  &:disabled {
-    cursor: not-allowed;
-    transform: scale(0.9);
+    &:disabled {
+      cursor: not-allowed;
+      transform: scale(0.9);
+    }
   }
 }
